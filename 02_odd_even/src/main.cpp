@@ -41,17 +41,31 @@ int main(int argc, char *argv[])
 
 	// Get the first argument
 	std::string argumentAsString = argv[1];
-	const char* argumentAsCharArray = argumentAsString.c_str();
+	//const char* argumentAsCharArray = argumentAsString.c_str();
 
 	//number = argv[1]; // No
 	//should use atoi?
 	// or std::stoi?
-
-	std::cout << argumentAsString << std::endl; // i think this should be removed
+	bool containsLetters = false;
+	for (int i = 0; i < argumentAsString.length(); i++) {
+		if (!isdigit(argumentAsString.at(i))) {
+			containsLetters = true;
+		}
+	}
+	
+	
+	
+	
 
 	// --------------- stop
-
-	printOddOrEven(number);
+	if (containsLetters) {
+		printf("NAN");
+	}
+	else {
+		number = std::stoi(argumentAsString);
+		printOddOrEven(number);
+	}
+	
 
 	return 0;
 }
