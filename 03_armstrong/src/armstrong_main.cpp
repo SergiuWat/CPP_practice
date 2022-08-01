@@ -1,9 +1,25 @@
 #include <iostream>
+#include <cmath>
+#include <string>
+
+int Cube(int number) {
+	return number * number * number;
+}
 
 bool isArmstrongNumber(int number)
 {
 	// TODO: implement some functionality to see if this number is an armstrong number
-
+	int temp = number;
+	int temp2;
+	int sum = 0;
+	while (number != 0) {
+		temp2 = number % 10;
+		sum += Cube(temp2);
+		number = number / 10;
+	}
+	if (sum == temp) {
+		return true;
+	}
 	return false;
 }
 
@@ -50,8 +66,19 @@ int main(int argc, char *argv[])
 	int readNumber = 0;
 	// Get the first argument
 	std::string argumentAsString = argv[1];
-	
-	// TODO: read number / cast to integer
+
+	if (argumentAsString.empty()) {
+		printf("No program arguments found");
+		return 1;
+	}
+
+	for (int i = 0; i < argumentAsString.length(); i++) {
+		if (!isdigit(argumentAsString.at(i))) {
+			printf("Undefined output");
+			return 1;
+		}			
+	}
+	readNumber = std::stoi(argumentAsString);
 
 	printIsArmstrong(readNumber);
 	return 0;
