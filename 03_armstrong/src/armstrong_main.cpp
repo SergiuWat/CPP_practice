@@ -2,11 +2,15 @@
 #include <cmath>
 #include <string>
 
-int Cube(int number) {
-	return number * number * number;
+int digitsPower(int digit, int digitsNumber) {
+	int power=1;
+	for (int i = 0; i < digitsNumber; i++) {
+		power *= digit;
+	}
+	return power;
 }
 
-bool isArmstrongNumber(int number)
+bool isArmstrongNumber(int number,int digitsNumber)
 {
 	// TODO: implement some functionality to see if this number is an armstrong number
 	int temp = number;
@@ -14,7 +18,7 @@ bool isArmstrongNumber(int number)
 	int sum = 0;
 	while (number != 0) {
 		temp2 = number % 10;
-		sum += Cube(temp2);
+		sum += digitsPower(temp2,digitsNumber);
 		number = number / 10;
 	}
 	if (sum == temp) {
@@ -23,9 +27,9 @@ bool isArmstrongNumber(int number)
 	return false;
 }
 
-void printIsArmstrong(int number)
+void printIsArmstrong(int number, int digitsNumber)
 {
-	if (isArmstrongNumber(number))
+	if (isArmstrongNumber(number,digitsNumber))
 	{
 		std::cout << "Armstrong" << std::endl;
 	}
@@ -64,6 +68,7 @@ int main(int argc, char *argv[])
 	}
 
 	int readNumber = 0;
+	int digitsNumber = 0;
 	// Get the first argument
 	std::string argumentAsString = argv[1];
 
@@ -76,10 +81,11 @@ int main(int argc, char *argv[])
 		if (!isdigit(argumentAsString.at(i))) {
 			printf("Undefined output");
 			return 1;
-		}			
+		}	
+		digitsNumber++;
 	}
 	readNumber = std::stoi(argumentAsString);
 
-	printIsArmstrong(readNumber);
+	printIsArmstrong(readNumber,digitsNumber);
 	return 0;
 }

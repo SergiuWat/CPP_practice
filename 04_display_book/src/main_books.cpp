@@ -35,7 +35,7 @@ struct Book
 	{
 		// TODO: add an author to the container authors array.
 		if (numAuthors >5) {
-			printf("Can't add more than 5 authors");
+			std::cout << "Can't add more than 5 authots" << std::endl;
 			return;
 		}
 		authors[numAuthors] = author;
