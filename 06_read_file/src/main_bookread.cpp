@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <string>
 #include <vector>
+#include <fstream>
 
 /**
 	Define a simple book.
@@ -34,8 +35,26 @@ public:
 std::vector<Book> readBooksFromTextFile(const std::string& file_name)
 {
 	std::vector<Book> results;
+	std::shared_ptr<Book> book =  std::make_shared<Book>();
+	std::string line;
+	int count = 1;
 	// TODO: BEGIN read the file -------------------------------------
+	std::ifstream file(file_name);
+	while (getline(file, line)) {
 
+		if (count % 2 == 1) {
+			book->name = line;
+		}
+		else {
+			book->authors = line;
+		}
+		if (!(book->name.empty()) && !(book->authors.empty())) {
+			results.push_back(*book);
+			book = std::make_shared<Book>();
+
+		}
+		count++;
+	}
 
 	// E.g. Book myBook;
 	//		...
